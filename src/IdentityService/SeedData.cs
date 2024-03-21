@@ -16,8 +16,14 @@ public class SeedData
         {
             var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.Migrate();
-
+            
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (userMgr.Users.Any())
+            {
+                return;
+            }
+
             var alice = userMgr.FindByNameAsync("alice").Result;
             if (alice == null)
             {
