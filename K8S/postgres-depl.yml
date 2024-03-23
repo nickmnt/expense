@@ -16,16 +16,20 @@ spec:
       - name: postgres
         image: postgres
         env:
-        - name: POSTGRES_PASSWORD
-          value: "postgrespw"
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: password
         ports:
         - containerPort: 5432
-        volumeMounts:
-        - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+        volumeMounts: 
+        - mountPath: /var/data/postgres
+          name: postgresdata
       volumes:
-      - name: postgres-data
-        emptyDir: {}
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-claim
 ---
 apiVersion: v1
 kind: Service
