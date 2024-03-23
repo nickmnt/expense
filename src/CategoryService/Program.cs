@@ -1,3 +1,4 @@
+using CategoryService.Data;
 using CategoryService.Models;
 using MongoDB.Driver;
 using MongoDB.Entities;
@@ -12,11 +13,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await DB.InitAsync("CategoryDb", MongoClientSettings
-    .FromConnectionString(builder.Configuration.GetConnectionString("MongoDbConnection")));
-
-await DB.Index<Category>()
-    .Key(x => x.Id, type: KeyType.Ascending)
-    .CreateAsync();
+try
+{
+    await DbInitializer.InitDb(app);
+}
+catch (Exception ex)
+{
+    Console.Out.WriteLine($"--> DEBUG: ExpenseService error initializing DB: {ex.Message}");
+}
 
 app.Run();
