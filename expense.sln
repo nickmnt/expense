@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService", "src\Iden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryService", "src\CategoryService\CategoryService.csproj", "{7A909D53-9083-44F8-8710-D3EC204037D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService", "src\GatewayService\GatewayService.csproj", "{5161156E-915A-4672-A515-45055815051A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{7A909D53-9083-44F8-8710-D3EC204037D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A909D53-9083-44F8-8710-D3EC204037D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A909D53-9083-44F8-8710-D3EC204037D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5161156E-915A-4672-A515-45055815051A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5161156E-915A-4672-A515-45055815051A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5161156E-915A-4672-A515-45055815051A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5161156E-915A-4672-A515-45055815051A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{19D523D6-BF12-418F-86CA-D3C3BFB25E5B} = {D5B89989-B2E1-4670-AA1D-A44E0ACAB5CF}
 		{7A909D53-9083-44F8-8710-D3EC204037D2} = {D5B89989-B2E1-4670-AA1D-A44E0ACAB5CF}
+		{5161156E-915A-4672-A515-45055815051A} = {D5B89989-B2E1-4670-AA1D-A44E0ACAB5CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C264445C-7F7D-40BF-930E-88DB7726266C}
