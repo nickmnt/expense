@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Entities;
 
 namespace CategoryService.Models;
 
-public class Category
+public class Category : Entity
 {
     [Key]
     [Required]
