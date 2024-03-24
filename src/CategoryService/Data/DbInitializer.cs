@@ -12,7 +12,7 @@ public class DbInitializer
             .FromConnectionString(app.Configuration.GetConnectionString("MongoDbConnection")));
 
         await DB.Index<Category>()
-            .Key(x => x.Id, type: KeyType.Ascending)
+            .Key(x => x.Name, type: KeyType.Text)
             .CreateAsync();
 
         var count = await DB.CountAsync<Category>();
@@ -27,9 +27,9 @@ public class DbInitializer
     {
         var categories = new List<Category>()
         {
-            new Category {Id = 1, Name = "Salary"},
-            new Category {Id = 2, Name = "Utilities"},
-            new Category {Id = 3, Name = "Rent"}
+            new Category { Name = "Salary"},
+            new Category { Name = "Utilities"},
+            new Category { Name = "Rent"}
         };
 
         await DB.SaveAsync(categories);

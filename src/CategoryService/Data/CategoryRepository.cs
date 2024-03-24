@@ -13,7 +13,7 @@ public class CategoryRepository : ICategoryRepository
         return result;
     }
 
-    public Task<Category> GetCategoryById(int id)
+    public Task<Category> GetCategoryById(string id)
     {
         return DB.Find<Category>().OneAsync(id);
     }
