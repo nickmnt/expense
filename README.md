@@ -2,6 +2,12 @@
 .NET expense tracker microservices.
 Expense tracker with Authentication, Grpc, RabbitMQ, SQL and NoSQL databases
 
+- IdentityService  
+- GatewayService  
+- CategoryService  
+- BudgetService  
+- ExpenseService
+
 In progress
 
 ## K8S Setup
