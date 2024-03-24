@@ -5,6 +5,8 @@ using MongoDB.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
