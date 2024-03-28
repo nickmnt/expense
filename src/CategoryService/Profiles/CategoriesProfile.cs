@@ -10,5 +10,9 @@ public class CategoriesProfile : Profile
     {
         CreateMap<Category, CategoryReadDto>();
         CreateMap<CategoryCreateDto, Category>();
+        CreateMap<Category, GrpcCategoryModel>()
+            .ForMember(dest => dest.CategoryId,
+                opt =>
+                    opt.MapFrom(src => src.ID));
     }
 }
