@@ -1,14 +1,20 @@
 using ExpenseService.Data;
+using ExpenseService.SyncDataServices.Grpc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<IExpenseRepo, ExpenseRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ICategoryDataClient, CategoryDataClient>();
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
+
+Seed.PrepPopulation(app);
 
 app.UseAuthorization();
 
