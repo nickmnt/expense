@@ -8,12 +8,12 @@ namespace CategoryService.Controllers;
 
 [ApiController]
 [Route("api/{controller}")]
-public class CategoryController : ControllerBase
+public class CategoriesController : ControllerBase
 {
     private readonly ICategoryRepository _repository;
     private readonly IMapper _mapper;
 
-    public CategoryController(ICategoryRepository repository, IMapper mapper)
+    public CategoriesController(ICategoryRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
