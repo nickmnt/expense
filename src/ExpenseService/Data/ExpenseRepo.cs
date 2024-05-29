@@ -59,7 +59,7 @@ public class ExpenseRepo : IExpenseRepo
             .FirstOrDefault(e => e.Id == expenseId);
     }
 
-    public void CreateCommand(int categoryId, Expense expense)
+    public void CreateExpense(int categoryId, Expense expense)
     {
         if (expense == null)
         {
