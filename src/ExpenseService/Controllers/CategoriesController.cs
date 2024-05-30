@@ -24,6 +24,6 @@ public class CategoriesController : ControllerBase
     {
         var categories = _repository.GetAllCategories();
 
-        return Ok(_mapper.Map<CategoryReadDto>(categories));
+        return Ok(_mapper.Map<IEnumerable<CategoryReadDto>>(categories));
     }
 }
