@@ -13,14 +13,6 @@ In progress
 ## K8S Setup
 
 ```bash
-docker run -d -p 5001:5000 --restart=always --name local-registry registry:2
-```
-
-```bash
-docker build -t localhost:5001/categoryservice:latest .
-```
-
-```bash
 kubectl create secret generic postgres-secret --from-literal=password="postgrespw"
 ```
 
