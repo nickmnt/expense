@@ -13,7 +13,7 @@ In progress
 ## K8S Setup
 
 ```bash
-docker run -d -p 5001:5001 --restart=always --name local-registry registry:2
+docker run -d -p 5001:5000 --restart=always --name local-registry registry:2
 ```
 
 ```bash
