@@ -22,12 +22,12 @@ WORKDIR /app
 COPY --from=build /out .
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://+:666;http://+:7002
+ENV ASPNETCORE_URLS=http://+:666;http://+:80
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Expose the necessary ports
 EXPOSE 666
-EXPOSE 7002
+EXPOSE 80
 
 # Run the application
 ENTRYPOINT ["dotnet", "CategoryService.dll"]
