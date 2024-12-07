@@ -13,6 +13,10 @@ In progress
 ## K8S Setup
 
 ```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+```
+
+```bash
 kubectl create secret generic postgres-secret --from-literal=password="postgrespw"
 ```
 
