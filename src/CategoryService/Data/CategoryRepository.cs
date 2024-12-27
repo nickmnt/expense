@@ -18,13 +18,20 @@ public class CategoryRepository : ICategoryRepository
         return DB.Find<Category>().OneAsync(id);
     }
 
-    public Task CreateCategory(Category category)
+    public async Task CreateCategory(Category category)
     {
         if (string.IsNullOrWhiteSpace(category.Name))
         {
             throw new ArgumentException("Category name is required.");
         }
+        
+        var existingCategory = await DB.Find<Category>().OneAsync(category.ID);
+        
+        if (existingCategory != null)
+        {
+            throw new ArgumentException("Category with the same ID already exists.");
+        }
 
-        return category.SaveAsync();
+        await category.SaveAsync();
     }
 }
