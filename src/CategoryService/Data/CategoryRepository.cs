@@ -20,6 +20,11 @@ public class CategoryRepository : ICategoryRepository
 
     public Task CreateCategory(Category category)
     {
+        if (string.IsNullOrWhiteSpace(category.Name))
+        {
+            throw new ArgumentException("Category name is required.");
+        }
+
         return category.SaveAsync();
     }
 }
