@@ -25,5 +25,11 @@
     <ItemGroup>
       <ProjectReference Include="..\CategoryService\CategoryService.csproj" />
     </ItemGroup>
-    
+
+    <ItemGroup>
+      <None Update="appsettings.Tests.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
