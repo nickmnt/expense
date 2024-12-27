@@ -25,7 +25,7 @@ app.MapGet("/protos/platforms.proto", async context =>
 
 try
 {
-    await DbInitializer.InitDb(app);
+    await DbInitializer.InitDb(app.Configuration, "CategoryDb");
 }
 catch (Exception ex)
 {

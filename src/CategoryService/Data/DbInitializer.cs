@@ -6,10 +6,10 @@ namespace CategoryService.Data;
 
 public class DbInitializer
 {
-    public static async Task InitDb(WebApplication app)
+    public static async Task InitDb(IConfiguration configuration, string databaseName)
     {
-        await DB.InitAsync("CategoryDb", MongoClientSettings
-            .FromConnectionString(app.Configuration.GetConnectionString("MongoDbConnection")));
+        await DB.InitAsync(databaseName, MongoClientSettings
+            .FromConnectionString(configuration.GetConnectionString("MongoDbConnection")));
 
         await DB.Index<Category>()
             .Key(x => x.Name, type: KeyType.Text)
