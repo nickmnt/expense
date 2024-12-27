@@ -45,6 +45,16 @@ namespace ExpenseTracker.Tests.CategoryService
         }
 
         [Fact]
+        public async Task GetAllCategories_ShouldReturnEmptyList_WhenNoCategoriesExist()
+        {
+            // Act
+            var categories = await _categoryRepository.GetAllCategories();
+
+            // Assert
+            Assert.Empty(categories);
+        }
+
+        [Fact]
         public async Task GetCategoryById_ShouldReturnCategory_WhenCategoryExists()
         {
             // Arrange
@@ -60,6 +70,16 @@ namespace ExpenseTracker.Tests.CategoryService
         }
 
         [Fact]
+        public async Task GetCategoryById_ShouldReturnNull_WhenCategoryDoesNotExist()
+        {
+            // Act
+            var result = await _categoryRepository.GetCategoryById("nonexistent-id");
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public async Task CreateCategory_ShouldSaveCategorySuccessfully()
         {
             // Arrange
@@ -72,6 +92,31 @@ namespace ExpenseTracker.Tests.CategoryService
             var savedCategory = await DB.Find<Category>().OneAsync("1");
             Assert.NotNull(savedCategory);
             Assert.Equal("Groceries", savedCategory.Name);
+        }
+
+        [Fact]
+        public async Task CreateCategory_ShouldThrowException_WhenCategoryHasInvalidData()
+        {
+            // Arrange
+            var category = new Category { ID = "1", Name = null }; // Invalid because Name is null
+
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => _categoryRepository.CreateCategory(category));
+        }
+        
+        [Fact]
+        public async Task CreateCategory_ShouldNotCreateDuplicateCategory_WhenIDAlreadyExists()
+        {
+            // Arrange
+            var category1 = new Category { ID = "1", Name = "Groceries" };
+            await category1.SaveAsync();
+            var category2 = new Category { ID = "1", Name = "Electronics" };
+
+            // Act
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() => _categoryRepository.CreateCategory(category2));
+
+            // Assert
+            Assert.Equal("Category with the same ID already exists.", exception.Message);
         }
     }
 }
