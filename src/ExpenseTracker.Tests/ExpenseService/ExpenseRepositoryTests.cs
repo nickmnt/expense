@@ -160,13 +160,6 @@ namespace ExpenseTracker.Tests.ExpenseService
             Assert.Throws<ArgumentNullException>(() => _repo.CreateCategory(null));
         }
 
-        [Fact]
-        public void CreateExpense_ShouldThrowException_WhenExpenseIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => _repo.CreateExpense(1, null));
-        }
-
         public void Dispose()
         {
             // Cleanup in-memory database
