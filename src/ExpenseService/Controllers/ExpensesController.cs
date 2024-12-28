@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExpenseService.Controllers;
 
 [ApiController]
-[Route("api/categories/{categoryId}/[controller]")]
+[Route("api/[controller]")]
 public class ExpensesController : ControllerBase
 {
     private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ public class ExpensesController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet()]
+    [HttpGet("categories/{categoryId:int}")]
     public ActionResult<IEnumerable<ExpenseReadDto>> GetExpensesForCategory(int categoryId)
     {
         if (!_repository.CategoryExists(categoryId))
@@ -46,16 +46,16 @@ public class ExpensesController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<ExpenseReadDto> CreateExpenseForCategory(int categoryId, ExpenseCreateDto expenseDto)
+    public ActionResult<ExpenseReadDto> CreateExpenseForCategory(ExpenseCreateDto expenseDto)
     {
-        if (!_repository.CategoryExists(categoryId))
+        if (!_repository.CategoryExists(expenseDto.CategoryId))
         {
             return NotFound();
         }
 
         var expense = _mapper.Map<Expense>(expenseDto);
         
-        _repository.CreateExpense(categoryId, expense);
+        _repository.CreateExpense(expenseDto.CategoryId, expense);
         _repository.SaveChanges();
 
         var expenseReadDto = _mapper.Map<ExpenseReadDto>(expense);

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseService.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/expenses/[controller]")]
 [ApiController]
 public class CategoriesController : ControllerBase
 {
