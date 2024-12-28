@@ -17,7 +17,7 @@ public class Expense
     [Required]
     public DateTime CreatedAt { get; set; }
 
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     public Category Category { get; set; }
 }
