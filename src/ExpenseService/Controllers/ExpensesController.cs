@@ -43,7 +43,7 @@ public class ExpensesController : ControllerBase
     [HttpPost]
     public ActionResult<ExpenseReadDto> CreateExpenseForCategory(ExpenseCreateDto expenseDto)
     {
-        if (!_repository.CategoryExists(expenseDto.CategoryId))
+        if (expenseDto.CategoryId.HasValue && !_repository.CategoryExists(expenseDto.CategoryId.Value))
         {
             return NotFound();
         }

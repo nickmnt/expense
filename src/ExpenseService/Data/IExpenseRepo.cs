@@ -15,5 +15,5 @@ public interface IExpenseRepo
     // Expenses
     IEnumerable<Expense> GetExpensesForCategory(int categoryId);
     Expense? GetExpense(int expenseId);
-    void CreateExpense(int categoryId, Expense expense);
+    void CreateExpense(int? categoryId, Expense expense);
 }
