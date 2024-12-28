@@ -8,15 +8,13 @@ public class Seed
 {
     public static void PrepPopulation(IApplicationBuilder applicationBuilder)
     {
-        using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
-        {
-            var grpcClient = serviceScope.ServiceProvider.GetService<ICategoryDataClient>();
+        using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
+        var grpcClient = serviceScope.ServiceProvider.GetService<ICategoryDataClient>();
 
-            var categories = grpcClient.ReturnAllCategories();
+        var categories = grpcClient.ReturnAllCategories();
                 
-            SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(),
-                serviceScope.ServiceProvider.GetService<IExpenseRepo>(), categories);
-        }
+        SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(),
+            serviceScope.ServiceProvider.GetService<IExpenseRepo>(), categories);
     }
 
     private static void SeedData(AppDbContext context, IExpenseRepo repo, IEnumerable<Category> categories)
