@@ -10,6 +10,16 @@ Expense tracker with Authentication, Grpc, RabbitMQ, SQL and NoSQL databases
 
 In progress
 
+## Image Setup
+
+```bash
+docker build -t categoryservice:latest .
+```
+
+```bash
+docker build -t expenseservice:latest .
+```
+
 ## K8S Setup
 
 ```bash
