@@ -9,6 +9,11 @@ namespace ExpenseTracker.Tests.CategoryService
     {
         private CategoryRepository _categoryRepository;
 
+        public CategoryRepositoryTests()
+        {
+            _categoryRepository = new CategoryRepository();
+        }
+
         public async Task InitializeAsync()
         {
             var config = new ConfigurationBuilder()
@@ -18,7 +23,6 @@ namespace ExpenseTracker.Tests.CategoryService
 
             await DbInitializer.InitDb(config, "CategoryDbTests");
             await DB.DropCollectionAsync<Category>();
-            _categoryRepository = new CategoryRepository();
         }
 
         public async Task DisposeAsync()
