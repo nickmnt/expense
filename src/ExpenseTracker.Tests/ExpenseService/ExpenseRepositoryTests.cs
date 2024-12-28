@@ -6,16 +6,15 @@ namespace ExpenseTracker.Tests.ExpenseService
 {
     public class ExpenseRepoTests : IDisposable
     {
-        private readonly DbContextOptions<AppDbContext> _options;
         private readonly AppDbContext _context;
         private readonly ExpenseRepo _repo;
 
         public ExpenseRepoTests()
         {
-            _options = new DbContextOptionsBuilder<AppDbContext>()
+            DbContextOptions<AppDbContext> options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: "ExpenseTestDb")
                 .Options;
-            _context = new AppDbContext(_options);
+            _context = new AppDbContext(options);
             _repo = new ExpenseRepo(_context);
 
             SeedDatabase();
