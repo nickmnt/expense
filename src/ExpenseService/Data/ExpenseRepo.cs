@@ -59,11 +59,13 @@ public class ExpenseRepo : IExpenseRepo
             .FirstOrDefault(e => e.Id == expenseId);
     }
 
-    public void CreateExpense(int? categoryId, Expense expense)
+    public Expense CreateExpense(int? categoryId, Expense expense)
     {
         ArgumentNullException.ThrowIfNull(expense);
 
         expense.CategoryId = categoryId;
         _context.Expenses.Add(expense);
+
+        return expense;
     }
 }
