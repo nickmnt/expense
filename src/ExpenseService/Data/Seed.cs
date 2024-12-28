@@ -10,11 +10,20 @@ public class Seed
     {
         using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
         var grpcClient = serviceScope.ServiceProvider.GetService<ICategoryDataClient>();
+        var logger = serviceScope.ServiceProvider.GetService<ILogger<Seed>>();
 
-        var categories = grpcClient.ReturnAllCategories();
+        if (grpcClient != null)
+        {
+            var categories = grpcClient.ReturnAllCategories();
                 
-        SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(),
-            serviceScope.ServiceProvider.GetService<IExpenseRepo>(), categories);
+            SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(),
+                serviceScope.ServiceProvider.GetService<IExpenseRepo>(), categories);
+        }
+        else
+        {
+            logger?.LogCritical("Could not get grpc client for receiving categories.");
+            throw new InvalidOperationException("GrpcClient is required to proceed, but was not found.");
+        }
     }
 
     private static void SeedData(AppDbContext context, IExpenseRepo repo, IEnumerable<Category> categories)
