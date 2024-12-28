@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Category>()
             .HasMany(c => c.Expenses)
-            .WithOne(e => e.Category!)
+            .WithOne(e => e.Category)
             .HasForeignKey(e => e.CategoryId);
 
         modelBuilder.Entity<Expense>()
