@@ -9,17 +9,19 @@ public class CategoryDataClient : ICategoryDataClient
 {
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
+    private readonly ILogger<CategoryDataClient> _logger;
 
-    public CategoryDataClient(IConfiguration configuration, IMapper mapper)
+    public CategoryDataClient(IConfiguration configuration, IMapper mapper, ILogger<CategoryDataClient> logger)
     {
         _configuration = configuration;
         _mapper = mapper;
+        _logger = logger;
     }
 
 
     public IEnumerable<Category> ReturnAllCategories()
     {
-        Console.Out.WriteLine($"--> Calling GRPC Service {_configuration["GrpcCategory"]}");
+        _logger.LogInformation($"--> Calling GRPC Service {_configuration["GrpcCategory"]}");
         var channel = GrpcChannel.ForAddress(_configuration["GrpcCategory"]);
         var client = new GrpcCategory.GrpcCategoryClient(channel);
         var request = new GetAllRequest();
@@ -31,7 +33,7 @@ public class CategoryDataClient : ICategoryDataClient
         }
         catch (Exception ex)
         {
-            Console.Out.WriteLine($"--> Could not call GRPC Server {ex.Message}");
+            _logger.LogError($"--> Could not call GRPC Server {ex.Message}");
             return null;
         }
     }
