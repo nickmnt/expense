@@ -164,7 +164,7 @@ namespace ExpenseTracker.Tests.ExpenseService
             _repo.SaveChanges();
 
             // Assert
-            var expenses = _repo.GetExpensesForCategory(1).ToArray(); // Checking that the expense has been added
+            var expenses = _repo.GetExpensesForCategory(1).ToArray(); 
             Assert.Contains(expenses, e => e.Description == "Uncategorized Expense");
         }
         
