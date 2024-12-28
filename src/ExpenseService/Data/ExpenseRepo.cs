@@ -53,7 +53,7 @@ public class ExpenseRepo : IExpenseRepo
             .ToList();
     }
 
-    public Expense GetExpense(int expenseId)
+    public Expense? GetExpense(int expenseId)
     {
         return _context.Expenses
             .FirstOrDefault(e => e.Id == expenseId);

@@ -37,11 +37,6 @@ public class ExpensesController : ControllerBase
     {
         var expense = _repository.GetExpense(expenseId);
 
-        if (expense == null)
-        {
-            return NotFound();
-        }
-
         return Ok(_mapper.Map<ExpenseReadDto>(expense));
     }
 
