@@ -15,7 +15,7 @@ spec:
                 name: categories-clusterip-srv
                 port:
                   number: 80
-          - path: /api/expenses
+          - path: /api/Expenses
             pathType: Prefix
             backend:
               service:
