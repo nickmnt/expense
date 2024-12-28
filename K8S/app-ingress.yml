@@ -8,10 +8,17 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /api/Categories
+          - path: /api/categories
             pathType: Prefix
             backend:
               service:
                 name: categoryservice
+                port:
+                  number: 80
+          - path: /api/expenses
+            pathType: Prefix
+            backend:
+              service:
+                name: expenseservice
                 port:
                   number: 80
