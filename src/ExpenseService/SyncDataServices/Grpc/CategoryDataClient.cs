@@ -21,8 +21,16 @@ public class CategoryDataClient : ICategoryDataClient
 
     public IEnumerable<Category> ReturnAllCategories()
     {
-        _logger.LogInformation($"--> Calling GRPC Service {_configuration["GrpcCategory"]}");
-        var channel = GrpcChannel.ForAddress(_configuration["GrpcCategory"]);
+        var grpcCategoryUrl = _configuration["GrpcCategory"];
+
+        if (string.IsNullOrEmpty(grpcCategoryUrl))
+        {
+            _logger.LogError("GRPC Category service URL not found in the configuration.");
+            throw new InvalidOperationException("GRPC Category service URL is missing from the configuration.");
+        }
+
+        _logger.LogInformation($"--> Calling GRPC Service {grpcCategoryUrl}");
+        var channel = GrpcChannel.ForAddress(grpcCategoryUrl);
         var client = new GrpcCategory.GrpcCategoryClient(channel);
         var request = new GetAllRequest();
 
@@ -33,8 +41,8 @@ public class CategoryDataClient : ICategoryDataClient
         }
         catch (Exception ex)
         {
-            _logger.LogError($"--> Could not call GRPC Server {ex.Message}");
-            return null;
+            _logger.LogError($"--> Could not call GRPC Server: {ex.Message}");
+            throw new InvalidOperationException("Error occurred while calling the GRPC server.", ex);
         }
     }
 }
