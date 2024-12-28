@@ -153,6 +153,21 @@ namespace ExpenseTracker.Tests.ExpenseService
             Assert.Contains(expenses, e => e.Description == "Medicine");
         }
         
+        [Fact]
+        public void CreateExpense_ShouldAddExpense_WhenCategoryIdIsNull()
+        {
+            // Arrange
+            var newExpense = new Expense { Description = "Uncategorized Expense", Amount = 20, CreatedAt = DateTime.Now };
+
+            // Act
+            _repo.CreateExpense(null, newExpense);
+            _repo.SaveChanges();
+
+            // Assert
+            var expenses = _repo.GetExpensesForCategory(1).ToArray(); // Checking that the expense has been added
+            Assert.Contains(expenses, e => e.Description == "Uncategorized Expense");
+        }
+        
         public void Dispose()
         {
             // Cleanup in-memory database
