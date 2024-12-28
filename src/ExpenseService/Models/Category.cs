@@ -9,11 +9,11 @@ public class Category
 
     [Required]
     [MaxLength(512)]
-    public string ExternalId { get; set; }
+    public required string ExternalId { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     public IEnumerable<Expense> Expenses { get; set; } = new List<Expense>();
 }
