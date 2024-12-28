@@ -10,6 +10,12 @@ Expense tracker with Authentication, Grpc, RabbitMQ, SQL and NoSQL databases
 
 In progress
 
+## EF Core
+
+```bash
+dotnet ef migrations add (insertname) -p ExpenseService
+```
+
 ## Image Setup
 
 ```bash
