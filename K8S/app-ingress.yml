@@ -8,7 +8,7 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /api/categories
+          - path: /api/Categories
             pathType: Prefix
             backend:
               service:
