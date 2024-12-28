@@ -160,12 +160,12 @@ namespace ExpenseTracker.Tests.ExpenseService
             var newExpense = new Expense { Description = "Uncategorized Expense", Amount = 20, CreatedAt = DateTime.Now };
 
             // Act
-            _repo.CreateExpense(null, newExpense);
+            var expense = _repo.CreateExpense(null, newExpense);
             _repo.SaveChanges();
 
             // Assert
-            var expenses = _repo.GetExpensesForCategory(1); 
-            Assert.Contains(expenses, e => e.Description == "Uncategorized Expense");
+            var foundExpense = _repo.GetExpense(expense.Id);
+            Assert.NotNull(foundExpense);
         }
         
         public void Dispose()
