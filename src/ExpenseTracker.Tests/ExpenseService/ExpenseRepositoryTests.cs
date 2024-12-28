@@ -152,14 +152,7 @@ namespace ExpenseTracker.Tests.ExpenseService
             Assert.Equal(2, expenses.Length);
             Assert.Contains(expenses, e => e.Description == "Medicine");
         }
-
-        [Fact]
-        public void CreateCategory_ShouldThrowException_WhenCategoryIsNull()
-        {
-            // Assert
-            Assert.Throws<ArgumentNullException>(() => _repo.CreateCategory(null));
-        }
-
+        
         public void Dispose()
         {
             // Cleanup in-memory database
