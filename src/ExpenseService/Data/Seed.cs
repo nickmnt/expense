@@ -9,21 +9,12 @@ public class Seed
     public static void PrepPopulation(IApplicationBuilder applicationBuilder)
     {
         using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
-        var grpcClient = serviceScope.ServiceProvider.GetService<ICategoryDataClient>();
-        var logger = serviceScope.ServiceProvider.GetService<ILogger<Seed>>();
-
-        if (grpcClient != null)
-        {
-            var categories = grpcClient.ReturnAllCategories();
+        var grpcClient = serviceScope.ServiceProvider.GetRequiredService<ICategoryDataClient>();
+        
+        var categories = grpcClient.ReturnAllCategories();
                 
-            SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(),
-                serviceScope.ServiceProvider.GetService<IExpenseRepo>(), categories);
-        }
-        else
-        {
-            logger?.LogCritical("Could not get grpc client for receiving categories.");
-            throw new InvalidOperationException("GrpcClient is required to proceed, but was not found.");
-        }
+        SeedData(serviceScope.ServiceProvider.GetRequiredService<AppDbContext>(),
+            serviceScope.ServiceProvider.GetRequiredService<IExpenseRepo>(), categories);
     }
 
     private static void SeedData(AppDbContext context, IExpenseRepo repo, IEnumerable<Category> categories)
