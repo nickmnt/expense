@@ -61,11 +61,8 @@ public class ExpenseRepo : IExpenseRepo
 
     public void CreateExpense(int categoryId, Expense expense)
     {
-        if (expense == null)
-        {
-            throw new ArgumentNullException(nameof(expense));
-        }
-                
+        ArgumentNullException.ThrowIfNull(expense);
+
         expense.CategoryId = categoryId;
         _context.Expenses.Add(expense);
     }
