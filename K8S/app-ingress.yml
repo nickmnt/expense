@@ -12,13 +12,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: categoryservice
+                name: categories-clusterip-srv
                 port:
                   number: 80
           - path: /api/expenses
             pathType: Prefix
             backend:
               service:
-                name: expenseservice
+                name: expenses-clusterip-srv
                 port:
                   number: 80
