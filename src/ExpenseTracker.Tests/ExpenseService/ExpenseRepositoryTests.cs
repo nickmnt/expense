@@ -60,8 +60,8 @@ namespace ExpenseTracker.Tests.ExpenseService
             _repo.SaveChanges();
 
             // Assert
-            var categories = _repo.GetAllCategories();
-            Assert.Equal(3, categories.Count());
+            var categories = _repo.GetAllCategories().ToArray();
+            Assert.Equal(3, categories.Length);
             Assert.Contains(categories, c => c.Name == "Health");
         }
 
@@ -109,7 +109,7 @@ namespace ExpenseTracker.Tests.ExpenseService
         public void GetExpensesForCategory_ShouldReturnExpenses_ForValidCategory()
         {
             // Act
-            var expenses = _repo.GetExpensesForCategory(1);
+            var expenses = _repo.GetExpensesForCategory(1).ToArray();
 
             // Assert
             Assert.Single(expenses);
@@ -148,8 +148,8 @@ namespace ExpenseTracker.Tests.ExpenseService
             _repo.SaveChanges();
 
             // Assert
-            var expenses = _repo.GetExpensesForCategory(1);
-            Assert.Equal(2, expenses.Count());
+            var expenses = _repo.GetExpensesForCategory(1).ToArray();
+            Assert.Equal(2, expenses.Length);
             Assert.Contains(expenses, e => e.Description == "Medicine");
         }
 
