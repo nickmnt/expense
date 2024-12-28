@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExpenseService.Controllers;
 
 [ApiController]
-[Route("api/expenses/categories/{categoryId}/[controller]")]
+[Route("api/categories/{categoryId}/[controller]")]
 public class ExpensesController : ControllerBase
 {
     private readonly IMapper _mapper;
